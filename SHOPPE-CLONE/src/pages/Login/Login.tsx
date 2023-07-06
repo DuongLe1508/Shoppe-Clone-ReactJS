@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 export default function Login() {
@@ -15,19 +16,23 @@ export default function Login() {
                   className='w-full p-3 border border-gray-300 rounded-sm outline-none focus:border-gray-500 focus:shadow-sm'
                   placeholder='Email'
                 />
-                <div className='mt-1 min-h-[1rem] text-sm text-red-600'></div>
+                <div className='mt-1 min-h-[1.5rem] text-sm text-red-600'></div>
               </div>
-              <div className='mt-3'>
+              <div className='mt-2'>
                 <input
                   type='password'
                   name='password'
+                  autoComplete='on'
                   className='w-full p-3 border border-gray-300 rounded-sm outline-none focus:border-gray-500 focus:shadow-sm'
                   placeholder='Password'
                 />
-                <div className='mt-1 min-h-[1rem] text-sm text-red-600'></div>
+                <div className='mt-1 min-h-[1.5rem] text-sm text-red-600'></div>
               </div>
-              <div className='mt3'>
-                <button className='w-full px-2 py-4 text-sm text-center text-white uppercase bg-red-500 hover:bg-red-600'>
+              <div className='mt-2'>
+                <button
+                  type='submit'
+                  className='w-full px-2 py-4 text-sm text-center text-white uppercase bg-red-500 hover:bg-red-600'
+                >
                   Đăng nhập
                 </button>
               </div>

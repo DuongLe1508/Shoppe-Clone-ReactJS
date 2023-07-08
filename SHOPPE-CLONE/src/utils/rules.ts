@@ -1,9 +1,11 @@
 import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
+import * as yup from 'yup'
 
 type Rules = {
   [key in 'email' | 'password' | 'confirm_password']?: RegisterOptions
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
   email: {
     required: {
@@ -31,11 +33,11 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
     },
     maxLength: {
       value: 160,
-      message: 'Password has length from 5 to 100 characters'
+      message: 'Password has length from 6 to 100 characters'
     },
     minLength: {
-      value: 5,
-      message: 'Password has length from 5 to 100 characters'
+      value: 6,
+      message: 'Password has length from 6 to 100 characters'
     }
   },
   confirm_password: {
@@ -45,11 +47,11 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
     },
     maxLength: {
       value: 160,
-      message: 'Password has length from 5 to 100 characters'
+      message: 'Password has length from 6 to 100 characters'
     },
     minLength: {
-      value: 5,
-      message: 'Password has length from 5 to 100 characters'
+      value: 6,
+      message: 'Password has length from 6 to 100 characters'
     },
     validate:
       typeof getValues === 'function'
@@ -57,3 +59,27 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
         : undefined
   }
 })
+
+export const schema = yup
+  .object({
+    email: yup
+      .string()
+      .required('Email is required')
+      .email()
+      .min(6, 'Email has length from 5 to 100 characters')
+      .max(160, 'Email has length from 5 to 100 characters'),
+    password: yup
+      .string()
+      .required('Password is required')
+      .min(5, 'Password has length from 5 to 100 characters')
+      .max(160, 'Password has length from 5 to 100 characters'),
+    confirm_password: yup
+      .string()
+      .required('Confirm password is required')
+      .min(5, 'Confirm_password has length from 5 to 100 characters')
+      .max(160, 'Confirm_password has length from 5 to 100 characters')
+      .oneOf([yup.ref('password')], "Enter again don'\t match")
+  })
+  .required()
+
+export type Schema = yup.InferType<typeof schema>

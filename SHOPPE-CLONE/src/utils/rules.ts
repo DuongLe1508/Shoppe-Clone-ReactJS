@@ -71,12 +71,12 @@ export const schema = yup
     password: yup
       .string()
       .required('Password is required')
-      .min(5, 'Password has length from 5 to 100 characters')
+      .min(6, 'Password has length from 5 to 100 characters')
       .max(160, 'Password has length from 5 to 100 characters'),
     confirm_password: yup
       .string()
       .required('Confirm password is required')
-      .min(5, 'Confirm_password has length from 5 to 100 characters')
+      .min(6, 'Confirm_password has length from 5 to 100 characters')
       .max(160, 'Confirm_password has length from 5 to 100 characters')
       .oneOf([yup.ref('password')], "Enter again don'\t match")
   })
